@@ -20,7 +20,7 @@ public class LosangeTest
 
 	@Before
 	public void setUp() {
-		
+
 	}
 
 	@Test
@@ -31,8 +31,8 @@ public class LosangeTest
 	@Test
 	public void toString_should_get_A_for_input_A() {
 		// arrange
-		sut = new Losange('A'); 
-		
+		sut = new Losange('A');
+
 		// act
 		String res = sut.toString();
 
@@ -40,29 +40,46 @@ public class LosangeTest
 		assertThat(res, is("A\n"));
 	}
 
+	//the key is to create test that are not final. 
+	//first test should go for 'ABBA'
+	//then add some end line return
+	//then a part of the space
+	//and so on...
 	@Test
 	public void toString_should_get_ABBA_for_input_B() {
 		// arrange
 		sut = new Losange('B');
-		
+
 		// act
 		String res = sut.toString();
 
 		// assert
+		// assertThat(res, is(" A\nB B\n A\n"));
 		assertThat(res, is(" A\nB B\n A\n"));
 	}
-	
+
 	@Test
 	public void toString_should_get_ABCCBA_for_input_C() {
 		// arrange
 		sut = new Losange('C');
-		
+
 		// act
 		String res = sut.toString();
 
 		// assert
-		assertThat(res, is("  A\n"+" B B\n"+"C   C\n"+" B B\n"+"  A\n"));
+		assertThat(res, is("  A\n" + " B B\n" + "C   C\n" + " B B\n" + "  A\n"));
 	}
 
+	@Test
+	public void toString_should_get_ABCDDCBA_for_input_D() {
+		// arrange
+		sut = new Losange('D');
+
+		// act
+		String res = sut.toString();
+
+		// assert
+		assertThat(res, is("   A\n" + "  B B\n" + " C   C\n" + "D     D\n" + " C   C\n" + "  B B\n" + "   A\n"));
+	}
 
 }

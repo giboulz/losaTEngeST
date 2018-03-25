@@ -19,57 +19,59 @@ public class Losange {
 		int index = LetterPosition.getNumberOfGivenLetter(this.targetLetter);
 		String res = "";
 
-		res += generateClosingLine(index - 1, 'A', index - 2);
+		res = generateClosingLine(index, res);
 
-		for (int i = 1; i < index; i++) {
+		res = createOpeningPartDiamond(index, res);
 
-			res += generateNewLine(0, index - i, 0, this.targetLetter);
-		}
+		res = createClosingPartDiamond(index, res);
 
-		if (index != 1) {
-			res += generateClosingLine(index - 1, 'A', index - 2);
+		if (!isOneLineDiamond(index)) {
+			res = generateClosingLine(index, res);
 		}
 
 		return res;
 	}
 
-	private String generateClosingLine(int nbSpaceBefore, char letter, int nbSpaceAfter) {
-		String res = "";
+	private String createClosingPartDiamond(int index, String res) {
+		for (int i = index - 1; i >= 2; i--) {
+			res = generateLineInDiamond(index, res, i);
+		}
+		return res;
+	}
 
-		res = addSpace(nbSpaceBefore, res);
+	private String createOpeningPartDiamond(int index, String res) {
+		for (int i = 2; i <= index; i++) {
+			res = generateLineInDiamond(index, res, i);
+		}
+		return res;
+	}
 
-		res += letter;
+	private boolean isOneLineDiamond(int index) {
+		return index == 1;
+	}
 
-		res = addSpace(nbSpaceAfter, res);
+	private String generateLineInDiamond(int index, String res, int i) {
+		char currentLetter = LetterPosition.getLetterForGivenNumber(i);
+		res = addSpace(index - i, res);
+		res += currentLetter;
+		res = addSpace(1 + ((i - 2) * 2), res);
+		res += currentLetter + "\n";
+		return res;
+	}
 
+	private String generateClosingLine(int index, String res) {
+		res = addSpace(index - 1, res);
+		res += "A";
 		res += "\n";
-
 		return res;
 	}
 
-	private String generateNewLine(int nbSpaceBefore, int nbSpaceInTheMiddle, int nbSpaceAfter, char letter) {
-		String res = "";
-
-		res = addSpace(nbSpaceBefore, res);
-
-		res += letter;
-
-		res = addSpace(nbSpaceInTheMiddle, res);
-		res += letter;
-
-		res = addSpace(nbSpaceAfter, res);
-
-		res += "\n";
-
-		return res;
-
-	}
-
-	private String addSpace(int nbSpaceInTheMiddle, String res) {
-		for (int i = 0; i < nbSpaceInTheMiddle; i++) {
-			res += " ";
+	private String addSpace(int nbSpace, String res) {
+		String spaces = "";
+		for (int i = 0; i < nbSpace; i++) {
+			spaces += " ";
 		}
-		return res;
+		return res + spaces;
 	}
 
 	public char getTargetLetter() {

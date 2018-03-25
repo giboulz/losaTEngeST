@@ -38,33 +38,54 @@ public class LetterPositionTest {
 	@Test
 	public void getLetterForGivenNumber_should_give_A_for_1() {
 
-		//act
+		// act
 		char res = LetterPosition.getLetterForGivenNumber(1);
-		
-		//assert
-		assertThat(res, is('A')); 
-		
+
+		// assert
+		assertThat(res, is('A'));
+
 	}
-	
+
 	@Test
 	public void getLetterForGivenNumber_should_give_N_for_14() {
 
-		//act
+		// act
 		char res = LetterPosition.getLetterForGivenNumber(14);
-		
-		//assert
-		assertThat(res, is('N')); 
-		
+
+		// assert
+		assertThat(res, is('N'));
+
 	}
-	
+
 	@Test
 	public void getLetterForGivenNumber_should_give_Z_for_26() {
 
-		//act
+		// act
 		char res = LetterPosition.getLetterForGivenNumber(26);
-		
-		//assert
-		assertThat(res, is('Z')); 
-		
+
+		// assert
+		assertThat(res, is('Z'));
+
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void getNumberOfGivenLetter_should_fail_for_a() {
+
+		// act
+		LetterPosition.getNumberOfGivenLetter('a');
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void getNumberOfGivenLetter_should_fail_for_a_number() {
+
+		// act
+		LetterPosition.getNumberOfGivenLetter('1');
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void getNumberOfGivenLetter_should_fail_for_ponctuation() {
+
+		// act
+		LetterPosition.getNumberOfGivenLetter('!');
 	}
 }
